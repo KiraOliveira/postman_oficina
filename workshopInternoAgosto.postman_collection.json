@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "42ea42f6-a1aa-46b6-aa46-f88bcbc1c4ac",
+		"name": "workshopInternoAgosto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22902429"
+	},
+	"item": [
+		{
+			"name": "allUsers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Should bring a users list\", function () {\r",
+							"    pm.expect(jsonData.quantidade).to.be.greaterThan(1);\r",
+							"    pm.expect(jsonData.usuarios[0].nome).not.to.be.null;\r",
+							"    pm.expect(jsonData.usuarios[0].email).not.to.be.null;\r",
+							"    pm.expect(jsonData.usuarios[0].password).not.to.be.null;\r",
+							"    pm.expect(jsonData.usuarios[0].administrador).not.to.be.null;\r",
+							"    pm.expect(jsonData.usuarios[0]._id).not.to.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"existent_user_id\", jsonData.usuarios[0]._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "justUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Should bring a single user\", function () {\r",
+							"    pm.expect(jsonData.nome).not.to.be.null;\r",
+							"    pm.expect(jsonData.email).not.to.be.null;\r",
+							"    pm.expect(jsonData.password).not.to.be.null;\r",
+							"    pm.expect(jsonData.administrador).not.to.be.null;\r",
+							"    pm.expect(jsonData._id).not.to.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"registered_user_email\", jsonData.email);\r",
+							"pm.environment.set(\"registered_user_password\", jsonData.password);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/usuarios/{{existent_user_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios",
+						"{{existent_user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userCadastrado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Should bring a single user\", function () {\r",
+							"    pm.expect(jsonData.nome).not.to.be.null;\r",
+							"    pm.expect(jsonData.email).not.to.be.null;\r",
+							"    pm.expect(jsonData.password).not.to.be.null;\r",
+							"    pm.expect(jsonData.administrador).not.to.be.null;\r",
+							"    pm.expect(jsonData._id).not.to.be.null;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/usuarios/{{registered_user_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios",
+						"{{registered_user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "oneUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Should bring a single user\", function () {\r",
+							"    pm.expect(jsonData.nome).not.to.be.null;\r",
+							"    pm.expect(jsonData.email).not.to.be.null;\r",
+							"    pm.expect(jsonData.password).not.to.be.null;\r",
+							"    pm.expect(jsonData.administrador).not.to.be.null;\r",
+							"    pm.expect(jsonData._id).not.to.be.null;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios/?_id=0uxuPY0cbmQhpEz1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios",
+						""
+					],
+					"query": [
+						{
+							"key": "_id",
+							"value": "0uxuPY0cbmQhpEz1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registerrUsers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User should be registered successfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+							"    pm.expect(jsonData._id).not.to.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"registered_user_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Kira 1 Oliveira\",\r\n    \"email\": \"kira1@qa.com.br\",\r\n    \"password\": \"teste 2\",\r\n    \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cadastrarUserWithEmailRandômico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User should be registered successfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+							"    pm.expect(jsonData._id).not.to.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"registered_user_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Kira Oliveira\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"password\": \"teste\",\r\n    \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registerUserSenhaRandômico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User should be registered successfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+							"    pm.expect(jsonData._id).not.to.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"registered_user_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Kira Oliveira\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"password\": \"{{$randomPassword}}\",\r\n    \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registerUserAllRandômico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User should be registered successfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+							"    pm.expect(jsonData._id).not.to.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"registered_user_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"{{$randomUserName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"password\": \"{{$randomPassword}}\",\r\n    \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registerUserNew",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User should be registered successfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+							"    pm.expect(jsonData._id).not.to.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"new_user\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"{{$randomUserName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"password\": \"{{$randomPassword}}\",\r\n    \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User should be successfully logged in\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Login realizado com sucesso\");\r",
+							"    pm.expect(jsonData.authorization).not.to.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"authorization_token\", jsonData.authorization);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{registered_user_email}}\",\r\n    \"password\": \"{{registered_user_password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateNewUser",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Beto\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios/{{new_user}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios",
+						"{{new_user}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
